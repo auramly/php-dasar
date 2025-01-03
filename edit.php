@@ -15,6 +15,16 @@ if (isset($_GET['nim'])) {
 
         $stmt = $mysqli->prepare("UPDATE students SET nama = ?, program_studi = ? WHERE nim = ?");
         $stmt->bind_param('sis', $nama, $program_studi, $nim);
+
+        if ($stmt->execute()) {
+            $_SESSION['success_message'] = 'Data berhasil diedit!';
+            header('Location: Mahasiswa.php');
+            exit();
+        } else {
+            $_SESSION['error_message'] = 'Data tidak bisa diedit: ' . $stmt->error;
+        }
+
+        $stmt->close();
     }
 
     $study_programs = $mysqli->query("SELECT * FROM study_programs");

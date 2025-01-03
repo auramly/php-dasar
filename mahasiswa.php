@@ -27,9 +27,20 @@ while ($row = $result->fetch_assoc()) {
 <body>
     <div class="container mt-4">
         <h2 class="mb-3 text-center">Daftar Mahasiswa Politeknik TEDC Bandung</h2>
-        <a href="tambah.php" class="btn btn-primary mb-3">Tambah Mahasiswa</a>
-        <table class="table table-hover table-bordered">
-            <thead class="text-center table-active">
+        <?php
+        if (isset($_SESSION['success_message'])) {
+            echo "<div class='alert alert-success' role='alert'>{$_SESSION['success_message']}</div>";
+            unset($_SESSION['success_message']);
+        }
+
+        if (isset($_SESSION['error_message'])) {
+            echo "<div class='alert alert-danger' role='alert'>{$_SESSION['error_message']}</div>";
+            unset($_SESSION['error_message']);
+        }
+        ?>
+        <a href="tambah.php" class="btn btn-success mb-3">Tambah Mahasiswa</a>
+        <table class="table table-hover table-striped table-bordered">
+            <thead class="table-dark">
                 <tr>
                     <th>No</th>
                     <th>NIM</th>
@@ -46,7 +57,7 @@ while ($row = $result->fetch_assoc()) {
                         <td><?= $value['nama']; ?></td>
                         <td><?= $value['name'] === null ? 'NULL' : $value['name']; ?></td>
                         <td>
-                            <a href="edit.php?nim=<?= $value['nim']; ?>" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i> Edit</a>
+                            <a href="edit.php?nim=<?= $value['nim']; ?>" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i> Edit</a>
                             <a href="hapus.php?nim=<?= $value['nim']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                 <i class="bi bi-trash"></i> Hapus
                             </a>
