@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 $mysqli = new mysqli('localhost', 'root', '', 'tedc2');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -11,17 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt = $mysqli->prepare("INSERT INTO students (nim, nama, program_studi) VALUES (?, ?, ?)");
     $stmt->bind_param('ssi', $nim, $nama, $program_studi);
-
-    if ($stmt->execute()) {
-        $_SESSION['success_message'] = 'Data berhasil ditambahkan!';
-        header('Location: Mahasiswa.php');
-        exit();
-    } else {
-        $_SESSION['error_message'] = 'Data tidak bisa ditambahkan: ' . $stmt->error;
-    }
-
-
-    $stmt->exit();
 }
 
 $study_programs = $mysqli->query("SELECT * FROM study_programs");
