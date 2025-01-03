@@ -27,8 +27,9 @@ while ($row = $result->fetch_assoc()) {
 <body>
     <div class="container mt-4">
         <h2 class="mb-3 text-center">Daftar Mahasiswa Politeknik TEDC Bandung</h2>
+        <a href="tambah.php" class="btn btn-success mb-3">Tambah Mahasiswa</a>
         <table class="table table-hover table-bordered">
-            <thead class="text-center">
+            <thead class="text-center table-active">
                 <tr>
                     <th>NIM</th>
                     <th>Nama</th>
