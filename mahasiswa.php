@@ -1,6 +1,12 @@
 <?php
 
 session_start();
+if (!isset($_SESSION['login'])) {
+    if ($_SESSION['login'] != true) {
+        header("Location: login.php");
+        exit;
+    }
+}
 
 $mysqli = new mysqli('localhost', 'root', '', 'tedc2');
 
@@ -73,3 +79,9 @@ while ($row = $result->fetch_assoc()) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<?php
+unset($_SESSION['success']);
+unset($_SESSION['message']);
+
+?>
